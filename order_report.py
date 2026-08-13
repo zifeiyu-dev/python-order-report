@@ -1,3 +1,12 @@
+import json
+
+
+def load_orders(file_path):
+    """从 JSON 文件读取订单列表。"""
+    with open(file_path, "r", encoding="utf-8") as file:
+        return json.load(file)
+
+
 def get_big_order_report(orders, minimum_amount=200):
     """返回大额订单的统计报告，并记录无法识别金额的订单编号。"""
     count = 0
@@ -25,17 +34,12 @@ def get_big_order_report(orders, minimum_amount=200):
     }
 
 
-orders = [
-    {"id": 101, "amount": 59.9, "user": "小王"},
-    {"id": 102, "amount": 235.5, "user": "小李"},
-    {"id": 103, "amount": "500", "user": "小张"},
-    {"id": 104, "amount": None, "user": "小陈"},
-]
+if __name__ == "__main__":
+    orders = load_orders("orders.json")
+    report = get_big_order_report(orders, minimum_amount=300)
 
-report = get_big_order_report(orders,minimum_amount=300)
-
-print("大额订单报告")
-print(f"数量：{report['count']}")
-print(f"总金额：{report['total']:.2f}")
-print(f"用户：{', '.join(report['users'])}")
-print(f"无效订单编号：{report['invalid_order_ids']}")
+    print("大额订单报告")
+    print(f"数量：{report['count']}")
+    print(f"总金额：{report['total']:.2f}")
+    print(f"用户：{', '.join(report['users'])}")
+    print(f"无效订单编号：{report['invalid_order_ids']}")

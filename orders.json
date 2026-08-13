@@ -1,0 +1,6 @@
+[
+  {"id": 101, "amount": 59.9, "user": "小王"},
+  {"id": 102, "amount": 235.5, "user": "小李"},
+  {"id": 103, "amount": "500", "user": "小张"},
+  {"id": 104, "amount": null, "user": "小陈"}
+]
