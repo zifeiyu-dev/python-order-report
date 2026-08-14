@@ -1,4 +1,5 @@
 import json
+import os
 
 
 def load_orders(file_path):
@@ -34,9 +35,14 @@ def get_big_order_report(orders, minimum_amount=200):
     }
 
 
+def get_minimum_amount():
+    """读取环境变量中的订单门槛；未设置时使用 300。"""
+    return float(os.getenv("BIG_ORDER_MINIMUM", "300"))
+
+
 if __name__ == "__main__":
     orders = load_orders("orders.json")
-    report = get_big_order_report(orders, minimum_amount=300)
+    report = get_big_order_report(orders, minimum_amount=get_minimum_amount())
 
     print("大额订单报告")
     print(f"数量：{report['count']}")

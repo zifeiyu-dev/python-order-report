@@ -1,6 +1,7 @@
+import os
 import unittest
 
-from order_report import get_big_order_report
+from order_report import get_big_order_report, get_minimum_amount
 
 
 class BigOrderReportTests(unittest.TestCase):
@@ -31,6 +32,14 @@ class BigOrderReportTests(unittest.TestCase):
         self.assertEqual(report["total"], 300.0)
         self.assertEqual(report["users"], ["未知用户"])
         self.assertEqual(report["invalid_order_ids"], [4, 5])
+
+    def test_uses_default_minimum_amount_when_not_configured(self):
+        old_value = os.environ.pop("BIG_ORDER_MINIMUM", None)
+        try:
+            self.assertEqual(get_minimum_amount(), 300.0)
+        finally:
+            if old_value is not None:
+                os.environ["BIG_ORDER_MINIMUM"] = old_value
 
 
 if __name__ == "__main__":
