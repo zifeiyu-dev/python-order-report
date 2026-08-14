@@ -9,6 +9,12 @@ source .venv/bin/activate
 
 看到命令行前出现 `(.venv)` 即表示已启用。退出虚拟环境使用 `deactivate`。
 
+安装项目依赖：
+
+```bash
+python -m pip install -r requirements.txt
+```
+
 配置订单门槛（可选）：
 
 ```bash
@@ -27,6 +33,12 @@ python order_report.py
 
 ```bash
 python -m unittest -v
+```
+
+请求一个公开 JSON 接口：
+
+```bash
+python fetch_todo.py
 ```
 
 当前功能：从 `orders.json` 读取订单，清洗金额、筛选金额不少于 300 的订单，并输出统计报告。
